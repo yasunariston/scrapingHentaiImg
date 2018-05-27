@@ -20,7 +20,7 @@ def generate_html(url_list):
         yield html
 
 
-def hentai_search(url_list, dir_name="images/"):
+def hentai_search(url_list, dir_name="../images/"):
     derectory_creation(dir_name)
     html_generated = generate_html(url_list)
 
