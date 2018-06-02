@@ -8,33 +8,27 @@ import inspect
 import time
 
 
-class setTimeProgramStartUp:
+class setProgram:
     def __init__(self, func, *args):
         self.func = func
         self.args = args
 
 
-    def setStartUp(hours, minutes, seconds):
-        while True:
-            waitForTime(hours, minutes, seconds)
-            func(*args)
-
-
-
-    def waitForTime(hours=7, minutes=0, seconds=0):
+    def waitForTime(self, hours=7, minutes=0, seconds=0):
         while True:
             now = datetime.now()
             if not now.hour == hours:
-                sleep((59 - now.minute) * 60)
+                time.sleep((now.minute + 59 - minutes) % 60 * 60)
             if not now.minute == minutes:
-                sleep(59 - now.second)
-            if not now.second >= seconds >= now.secondi - 1:
-                sleep(1)
-            else:
-                if now.hour == hours and now.minute == minutes:
-                    sleep(1)
-                    break
+                time.sleep((now.second + 59 - seconds) % 60)
+            if not now.second == seconds:
+                time.sleep(1)
+            elif now.hour == hours and now.minute == minutes:
+                break
 
 
-
-if __name__ == "__main__":
+    def setStartUp(self, *hms):
+        while True:
+            print(self, *hms)
+            self.waitForTime(*hms)
+            self.func(*self.args)
